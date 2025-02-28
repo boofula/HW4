@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** Will Bales / 002 ***
  *
  * This HashingProblems object contains three methods / problems that you must
  * complete utilize the HashMap object within the Java's Collection Framework Library.
@@ -32,16 +32,28 @@ class HashingProblems {
      */
 
     public double getAverage(HashMap<Integer, Integer> map, int[] array) {
+      
+      // This is the variable that will hold the total value
+      int totalFromKeys = 0;
+      // This is the variable that will hold the number of valid keys
+      int validKeys = 0;
 
-        /*
-         * ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOU NAME AT TOP OF FILE
-         *
-         * Note: if NO values found in common between the HashMap and supplied array,
-         * returning 0.0 is NOT correct, as that is not the average value. Whereas
-         * returning 0.0/0.0 IS correct (which would return a non-number).
-         */
+      // Loop through the array and check if the key is in the map
+      for (int i = 0; i < array.length; i++) {
+          // If the key is in the map, add the value to the total and increment the valid keys
+          if (map.containsKey(array[i]) && map.get(array[i]) != null) {
+              totalFromKeys += map.get(array[i]);
+              validKeys++;
+          }
+      }
 
-         return 0.0 / 0.0;
+      // If there are no valid keys, return 0.0/0.0
+      if (validKeys == 0) {
+          return 0.0/0.0;
+      }else { // otherwise return the average casted as a double
+          return (double) totalFromKeys / validKeys;
+      }
+
   }
 
 
@@ -54,14 +66,18 @@ class HashingProblems {
 
   public ArrayList<String> odd(HashMap<Integer, String> map) {
     
+      // This array list will hold the values of the odd keys
       ArrayList<String> result = new ArrayList<>();
 
-      /*
-       * ADD YOUR CODE HERE
-       *
-       * Hint: Consider iterating over the HashMap using the keySet method.
-       */
+      // Get the key set from the map
+      Set<Integer> keys = map.keySet();
 
+      // Loop through the keys and add the values of the odd keys to the result array list
+      for (Integer key : keys) {
+          if ((key % 2) != 0) {
+              result.add(map.get(key));
+          }
+      }
 
       return result;
   }
@@ -105,12 +121,27 @@ class HashingProblems {
    */
 
   public int twoSums(int[] numbers, int k) {
+    
+    // Create a HashSet to store the numbers
+    HashSet<Integer> set = new HashSet<>();
 
-      /*
-       * ADD YOUR CODE HERE
-       */
+    // Add the numbers to the set
+    for (int i = 0; i < numbers.length; i++) {
+        set.add(numbers[i]);
+    }
 
-      return -1;
+    // Create a count variable to store the number of times k appear
+    int count = 0;
+
+    // Loop through the numbers and check if the set contains the number + k
+    // If it does, increment the count
+    // number + k will be the number that is k away from the current number
+    for (int i = 0; i < numbers.length; i++) {
+        if (set.contains(numbers[i] + k)) {
+            count++;
+        }
+    }
+    return count;
   }
 
 } /* end class HashingProblems */
